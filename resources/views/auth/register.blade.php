@@ -4,30 +4,30 @@
 
     <form action="{{route('post_register')}}" method="POST" class="flex flex-col px-6 space-y-2">
         @csrf
-        <label for="username" class="font-bold py-2">
+        <label for="name" class="font-bold py-2">
             Username
         </label>
-        <input type="text" name="username" id="username"  placeholder="Enter unique username"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full">
+        <input type="text" name="name" id="name"  placeholder="Enter unique username"
+               class="border-2 border-gray-300 p-4 rounded-lg w-full  form-input">
 
         <label for="email" class="font-bold py-2">
             Email
         </label>
         <input type="email" name="email" id="email" placeholder="Enter your email"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full"
+               class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
         >
 
         <label for="password" class="font-bold py-2">
             Password
         </label>
         <input type="password" name="password" id="password" placeholder="Fill in password"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full"
+               class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
         >
         <label for="password_confirmation" class="font-bold py-2">
             Repeat Password
         </label>
         <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Repeat password"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full"
+               class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
         >
 
         <div class="py-4">

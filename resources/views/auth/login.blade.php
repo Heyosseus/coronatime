@@ -8,19 +8,19 @@
             Username
         </label>
         <input type="text" name="username" id="username"  placeholder="Enter unique username"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full">
+               class="border-2 border-gray-300 p-4 rounded-lg w-full form-input">
 
         <label for="password" class="font-bold py-2 mt-6">
             Password
         </label>
         <input type="password" name="password" id="password" placeholder="Fill in password"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full"
+               class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
         >
 
         <div class="flex items-center justify-between mt-6">
         <div class="">
-            <input type="checkbox" name="remember_device" id="remember_device">
-            <label for="remember_device" class="font-bold text-sm">Remember this device</label>
+            <input type="checkbox" name="remember_device" id="remember_device" class="form-checkbox">
+            <label for="remember_device" class="font-bold text-sm ">Remember this device</label>
         </div>
             <a href="#" class="text-sm text-blue-600 font-bold" >Forgot password?</a>
         </div>

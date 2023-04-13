@@ -22,7 +22,7 @@
             <input type="checkbox" name="remember_device" id="remember_device" class="form-checkbox">
             <label for="remember_device" class="font-bold text-sm ">Remember this device</label>
         </div>
-            <a href="#" class="text-sm text-blue-600 font-bold" >Forgot password?</a>
+            <a href="{{route('reset_password')}}" class="text-sm text-blue-600 font-bold" >Forgot password?</a>
         </div>
 
         <button type="submit" class="bg-green-600 text-white p-3 mt-10 rounded hover:bg-blue-400 font-bold">Log in</button>

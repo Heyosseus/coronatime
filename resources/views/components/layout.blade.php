@@ -13,8 +13,7 @@
 <header>
 <div class="flex justify-between items-center p-6">
     <img src="/storage/logo.png" alt="logo">
-
-    </div>
+</div>
 </header>
 {{$slot}}
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,12 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('post_login');
 });
+
+Route::controller(ResetPasswordController::class)->group(function () {
+    Route::get('/reset-password', [ResetPasswordController::class, 'create'])->name('reset_password');
+    Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('post_reset_password');
+});
+
+Route::view('/confirmation', 'verification.confirmation')->name('confirmation');
+Route::view('/new-password', 'verification.new-password')->name('new_password');
+Route::view('/confirmation-email', 'verification.confirmation-email')->name('confirmation_email');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -14,21 +15,21 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+        $attributes =  $request->validate([
+             'name' => 'required|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+             'password_confirmation' => 'required',
         ]);
 
-        // Create a new user
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
+            'name' => $attributes['name'],
+            'email' => $attributes['email'],
+            'password' => Hash::make($attributes['password']),
         ]);
 
         // Check if the "remember_device" checkbox was checked
-        $rememberDevice = $request->has('remember_device') ? true : false;
+        $rememberDevice = $request->has('remember_device');
 
         // Store the value of the checkbox in the "users" table
         $user->remember_device = $rememberDevice;

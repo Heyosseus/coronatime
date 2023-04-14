@@ -8,20 +8,26 @@
             Username
         </label>
         <input type="text" name="name" id="name"  placeholder="Enter unique username"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full form-input">
+               class="@if($errors->has('name')) border-red-500 @elseif(! $errors->any()) border-gray-300 @endif p-4 rounded-lg w-full form-input">
 
-        @error( 'name' )
-            <p class="text-red-400 text-xs mt-1">{{$message}}</p>
-        @enderror
+        @if($errors->has('name'))
+            <div class="flex space-x-1 mt-1">
+                <img src="/storage/invalid.png" alt="" width="20" height="10">
+                <p class="text-red-500 text-xs mt-1">{{ $errors->first('name') }}</p>
+            </div>
+        @endif
         <label for="password" class="font-bold py-2 mt-6">
             Password
         </label>
         <input type="password" name="password" id="password" placeholder="Fill in password"
-               class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
+               class="@if($errors->has('name')) border-red-500 @elseif(! $errors->any()) border-gray-300 @endif p-4 rounded-lg w-full form-input"
         >
-        @error( 'password' )
-            <p class="text-red-400 text-xs mt-1">{{$message}}</p>
-        @enderror
+        @if($errors->has('password'))
+            <div class="flex space-x-1 mt-1">
+                <img src="/storage/invalid.png" alt="" width="20" height="10">
+                <p class="text-red-500 text-xs mt-1">{{ $errors->first('password') }}</p>
+            </div>
+        @endif
 
         <div class="flex items-center justify-between mt-6">
         <div class="">

@@ -2,9 +2,10 @@
     <div class="px-6 ">
         <h1 class="font-extrabold  text-xl uppercase text-center mt-10">reset password</h1>
 
-        <form class="mt-10 space-y-6">
-
+        <form action='{{route('update_recovery_password')}}' method="POST" class="mt-10 space-y-6">
+            @csrf
             <div>
+{{--                <input type="hidden" name="token" value="{{ $token }}">--}}
                 <label for="password" class="font-bold py-6 ">
                     Password
                 </label>
@@ -17,12 +18,16 @@
                 <label for="password_confirmation" class="font-bold py-6">
                     Repeat Password
                 </label>
-                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Repeat password"
+                <input type="password" name="password_confirmation" id="password_confirmation"
+                       placeholder="Repeat password"
                        class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
                 >
             </div>
-            <button type="submit" class="fixed bottom-20 left-6 right-6 bg-green-600 text-white p-3 mt-8 rounded-md hover:bg-blue-400 font-extrabold ">Save Changes</button>
+            <button type="submit"
+                    class="fixed bottom-20 left-6 right-6 bg-green-600 text-white p-3 mt-8 rounded-md hover:bg-blue-400 font-extrabold ">
+                Save Changes
+            </button>
         </form>
-        </div>
+    </div>
 
 </x-layout>

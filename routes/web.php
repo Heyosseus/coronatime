@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RecoveryPasswordController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\VerifyEmailController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,20 +21,29 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')->name('home');
 
 Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', [RegisterController::class, 'create'])->name('register');
-    Route::post('/register', [RegisterController::class, 'store'])->name('post_register');
+	Route::get('/register', [RegisterController::class, 'create'])->name('register');
+	Route::post('/register', [RegisterController::class, 'store'])->name('post_register');
 });
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->name('post_login');
+	Route::get('/login', [LoginController::class, 'create'])->name('login');
+	Route::post('/login', [LoginController::class, 'store'])->name('post_login');
+	Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
 
-Route::controller(ResetPasswordController::class)->group(function () {
-    Route::get('/reset-password', [ResetPasswordController::class, 'create'])->name('reset_password');
-    Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('post_reset_password');
+Route::controller(VerifyEmailController::class)->group(function () {
+	Route::get('/reset-password', [VerifyEmailController::class, 'create'])->name('reset_password');
+	Route::post('/reset-password', [VerifyEmailController::class, 'store'])->name('post_reset_password');
+});
+
+Route::controller(RecoveryPasswordController::class)->group(function () {
+	Route::post('/recovery-password', [RecoveryPasswordController::class, 'update'])->name('update_recovery_password');
 });
 
 Route::view('/confirmation', 'verification.confirmation')->name('confirmation');
 Route::view('/new-password', 'verification.new-password')->name('new_password');
 Route::view('/confirmation-email', 'verification.confirmation-email')->name('confirmation_email');
+
+Route::view('/email-verification', 'emails.confirm-reset-password')->name('email_verification_reset_password');
+
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

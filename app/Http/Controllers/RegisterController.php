@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRegisterRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,14 +15,9 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function store(StoreRegisterRequest $request): RedirectResponse
     {
-        $attributes =  $request->validate([
-             'name' => 'required|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-             'password_confirmation' => 'required',
-        ]);
+        $attributes =  $request->validated();
 
         $user = User::create([
             'name' => $attributes['name'],

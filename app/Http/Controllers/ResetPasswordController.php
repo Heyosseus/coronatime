@@ -7,7 +7,7 @@ use Illuminate\View\View;
 
 class ResetPasswordController extends Controller
 {
-    public function create() : View
+    public function create(): View
     {
         return view('verification.reset-password');
     }

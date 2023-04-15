@@ -4,6 +4,7 @@
 
         <form action='{{route('update_recovery_password')}}' method="POST" class="mt-10 space-y-6">
             @csrf
+            @method('PUT')
             <div>
 {{--                <input type="hidden" name="token" value="{{ $token }}">--}}
                 <label for="password" class="font-bold py-6 ">

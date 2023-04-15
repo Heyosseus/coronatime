@@ -10,6 +10,10 @@ module.exports = {
         fontFamily: {
             firago: ['firago', 'sans-serif'],
         },
+        width:{
+            'form': '40vw',
+            'img': '100vw',
+        }
     },
   },
   plugins: [

@@ -13,7 +13,7 @@ class RecoveryPasswordController extends Controller
 	public function store(Request $request): RedirectResponse
 	{
 		$token = $request->input('token');
-		$resetRecord = DB::table('password_resets')->where('token', $token)->first();
+		$resetRecord = DB::table('password_reset_tokens')->where('token', $token)->first();
 
 		if (!$resetRecord) {
 			return redirect()->route('login')->with('error', 'Invalid password reset link.');
@@ -52,6 +52,6 @@ class RecoveryPasswordController extends Controller
 		DB::table('password_reset_tokens')->where('email', $email)->delete();
 
 		// Redirect the user to a confirmation page
-		return redirect()->route('confirmation_password_reset');
+		return redirect()->route('confirmation_email');
 	}
 }

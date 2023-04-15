@@ -18,7 +18,7 @@ class ResetPasswordMail extends Mailable
 		$this->token = $token;
 	}
 
-	public function build(): ResetPasswordMail
+	public function build(): Mailable
 	{
 		$token = route('email_verification_reset_password', ['token' => $this->token]);
 

@@ -3,7 +3,7 @@
         <h1 class="font-bold px-6 text-2xl">@lang('register.title')</h1>
         <p class="text-sm px-6 mt-3">@lang('register.paragraph')</p>
 
-        <form action="{{route('post_register')}}" method="POST" class="flex flex-col px-6 space-y-2 lg:w-form ">
+        <form action="{{route('post_register')}}" method="POST" class="flex flex-col px-6 space-y-2 lg:w-login-form ">
             @csrf
             <label for="name" class="font-bold py-2">
                 @lang('register.username')

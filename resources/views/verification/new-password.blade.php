@@ -1,8 +1,8 @@
-<x-layout>
+<x-verification-layout>
     <div class="px-6 ">
         <h1 class="font-extrabold  text-xl uppercase text-center mt-10">reset password</h1>
 
-        <form action='{{route('update_recovery_password')}}' method="POST" class="mt-10 space-y-6">
+        <form action='{{route('update_recovery_password')}}' method="POST" class="mt-10 space-y-6 lg:w-form">
             @csrf
             @method('PUT')
             <div>
@@ -25,10 +25,11 @@
                 >
             </div>
             <button type="submit"
-                    class="fixed bottom-20 left-6 right-6 bg-green-600 text-white p-3 mt-8 rounded-md hover:bg-blue-400 font-extrabold ">
+                    class="fixed bottom-20 left-6 right-6 bg-green-600 text-white p-3 mt-8 rounded-md hover:bg-blue-400 font-extrabold
+                     lg:w-form  lg:static lg:flex lg:items-center lg:justify-center ">
                 Save Changes
             </button>
         </form>
     </div>
 
-</x-layout>
+</x-verification-layout>

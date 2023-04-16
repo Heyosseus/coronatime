@@ -1,9 +1,11 @@
-<x-layout>
+<x-verification-layout>
     <div class="flex flex-col items-center justify-center h-96" >
-        <img src="/storage/checkmark.gif" alt="" >
-        <p class="text-center py-4">Your password has been<br>
+        <img src="/storage/checkmark.gif" alt="" class="lg:w-16">
+        <p class="text-center py-4 lg:text-lg" >Your password has been<br class="lg:hidden">
             updeted successfully</p>
-        <button type="submit" class="fixed bottom-20 left-6 right-6 bg-green-600 text-white p-3 mt-8 rounded-md hover:bg-blue-400 font-extrabold ">Sign In</button>
+        <button type="submit" class="fixed bottom-20 left-6 right-6 bg-green-600 text-white p-3 mt-8 rounded-md hover:bg-blue-400 font-extrabold
+         lg:w-96  lg:static lg:flex lg:items-center lg:justify-center
+        ">Sign In</button>
     </div>
 
-</x-layout>
+</x-verification-layout>

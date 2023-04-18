@@ -2,56 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RecoveryPasswordController extends Controller
 {
-	public function store(Request $request): RedirectResponse
+	public function create($token)
 	{
-		$token = $request->input('token');
-		$resetRecord = DB::table('password_reset_tokens')->where('token', $token)->first();
-
-		if (!$resetRecord) {
-			return redirect()->route('login')->with('error', 'Invalid password reset link.');
+		$user = User::where('token', $token)->where('is_verified', 0)->first();
+		if ($user) {
+			$email = $user->email;
+			return view('verification.new-password', compact('email', 'token'));
 		}
-
-		return redirect()->route('confirmation_email');
+		return redirect()->route('verification.reset-password')->with('failed', 'Password reset link is expired');
 	}
 
 	public function update(Request $request): RedirectResponse
 	{
-		// Validate the user's input
-		$validator = Validator::make($request->all(), [
-			'token'    => 'required',
-			'email'    => 'required|email',
-			'password' => 'required|confirmed|min:8',
+		//		dd($request->all());
+		$this->validate($request, [
+			'email'                 => 'required',
+			'password'              => 'required|min:6',
+			'password_confirmation' => 'required|same:password',
 		]);
 
-		if ($validator->fails()) {
-			return back()->withErrors($validator);
+		$user = User::where('email', $request->email)->first();
+		if ($user) {
+			$user->password = Hash::make($request->password);
+			$user->save();
+			return redirect()->route('confirmation_email')->with('success', 'Success! password has been changed');
 		}
-
-		$token = $request->input('token');
-		$email = $request->input('email');
-		$password = $request->input('password');
-
-		$resetRecord = DB::table('password_reset_tokens')->where('token', $token)->where('email', $email)->first();
-
-		if (!$resetRecord) {
-			return redirect()->route('login')->with('error', 'Invalid password reset link.');
-		}
-
-		// Update the user's password in the database
-		DB::table('users')->where('email', $email)->update(['password' => Hash::make($password)]);
-
-		// Delete the password reset record from the database
-		DB::table('password_reset_tokens')->where('email', $email)->delete();
-
-		// Redirect the user to a confirmation page
-		return redirect()->route('confirmation_email');
+		return redirect()->route('reset_password')->with('failed', 'Failed! something went wrong');
 	}
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\ResetPasswordMail;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,32 +20,23 @@ class VerifyEmailController extends Controller
 
 	public function store(Request $request): RedirectResponse
 	{
+		$this->validate($request, [
+			'email' => 'required|email',
+		]);
+
 		$user = User::where('email', $request->email)->first();
-
 		if (!$user) {
-			return redirect()->back()->with('error', 'Email address not found.');
+			return back()->with('failed', 'Failed! email is not registered.');
 		}
 
-		$existingToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
+		$token = Str::random(60);
 
-		if ($existingToken) {
-			// Update the existing token with a new one
-			$token = Str::random(60);
-			DB::table('password_reset_tokens')
-				->where('email', $user->email)
-				->update(['token' => $token, 'created_at' => Carbon::now()]);
-		} else {
-			// Insert a new token
-			$token = Str::random(60);
-			DB::table('password_reset_tokens')->insert([
-				'email'      => $user->email,
-				'token'      => $token,
-				'created_at' => Carbon::now(),
-			]);
-		}
-		//		$token = route('email_verification_reset_password', ['token' => $token]);
+		$user['token'] = $token;
+		$user['is_verified'] = 0;
+		$user->save();
 
-		Mail::to($user)->send(new ResetPasswordMail($token));
+		//		$token = DB::table('password_reset_tokens')->where('email', $user->email)->first();
+		Mail::to($request->email)->send(new ResetPasswordMail($token));
 
 		return redirect()->route('confirmation');
 	}

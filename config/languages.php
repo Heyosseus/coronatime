@@ -1,5 +1,6 @@
 <?php
+
 return[
-    'en' => 'english',
-    'ka' => 'georgian',
+	'en' => 'En',
+	'ka' => 'Ka',
 ];

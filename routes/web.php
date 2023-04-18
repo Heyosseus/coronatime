@@ -37,14 +37,16 @@ Route::controller(VerifyEmailController::class)->group(function () {
 });
 
 Route::controller(RecoveryPasswordController::class)->group(function () {
-	Route::post('/recovery-password', [RecoveryPasswordController::class, 'update'])->name('update_recovery_password');
+	Route::get('/new-password/{token}', [RecoveryPasswordController::class, 'create'])->name('new_password');
+	Route::put('/recovery-password', [RecoveryPasswordController::class, 'update'])->name('recovery_password');
 });
 
+//for confirmation pages
 Route::view('/confirmation', 'verification.confirmation')->name('confirmation');
-Route::view('/new-password', 'verification.new-password')->name('new_password');
 Route::view('/confirmation-email', 'verification.confirmation-email')->name('confirmation_email');
 
 // email template
 Route::view('/email-verification', 'emails.confirm-reset-password')->name('email_verification_reset_password');
 
+//for localization
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

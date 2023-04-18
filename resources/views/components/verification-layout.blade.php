@@ -13,9 +13,11 @@
 <header class="flex-col flex">
     <div class="flex justify-between items-center p-6 lg:px-16">
         <img src="/storage/logo.png" alt="logo" class="lg:w-52 lg:flex   lg:mx-auto">
+
     </div>
 
     <div class="flex items-center justify-center ">
+
     {{$slot}}
     </div>
 </header>

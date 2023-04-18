@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="lg:px-12">
+    <div class="lg:px-12 ">
         <h1 class="font-bold px-6 text-2xl">@lang('login.welcome')</h1>
         <p class="text-sm px-6 mt-3">@lang('login.paragraph')</p>
 
@@ -38,10 +38,28 @@
             <a href="{{route('reset_password')}}" class="text-sm text-blue-600 font-bold">@lang('login.forgot')</a>
         </div>
 
+
         <button type="submit" class="bg-green-600 text-white p-3 mt-10 rounded hover:bg-blue-400 font-bold">@lang('login.login')
         </button>
 
-        <p class="text-center py-8">@lang('login.account')<a href="{{route('register')}}" class="font-bold ">@lang('login.sign_up')</a></p>
+
+
+        <p class="text-center py-8 flex justify-around">@lang('login.account')<a href="{{route('register')}}" class="font-bold ">@lang('login.sign_up')</a></p>
+            <div class="flex items-center justify-center space-x-3 mr-9 w-full mx-auto">
+                <p>@lang('home.switch')</p>
+                <a class="rounded-2xl bg-green-600 text-white py-2 px-5 font-bold ">
+                    {{ Config::get('languages')[App::getLocale()] }}
+                </a>
+                <div class="rounded-2xl bg-green-600 text-white py-2 px-5 font-bold ">
+                    @foreach (Config::get('languages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                            <a class="" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </form>
+
     </div>
+
 </x-layout>

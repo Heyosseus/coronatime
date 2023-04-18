@@ -2,11 +2,25 @@
     <div class="px-6 ">
         <h1 class="font-extrabold  text-xl uppercase text-center mt-10">reset password</h1>
 
-        <form action='{{route('update_recovery_password')}}' method="POST" class="mt-10 space-y-6 lg:w-form">
+        <form action='{{route('recovery_password')}}' method="POST" class="mt-10 space-y-6 lg:w-form">
             @csrf
             @method('PUT')
             <div>
 {{--                <input type="hidden" name="token" value="{{ $token }}">--}}
+
+                @if (Session::has("success"))
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        {{ Session::get('success') }}
+                    </div>
+                @elseif (Session::has("failed"))
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        {{ Session::get('failed') }}
+                    </div>
+                @endif
+{{--                <input type="hidden" name="token" value="{{ $token }}">--}}
+                <input type="hidden" name="email" value="{{ $email }} "/>
                 <label for="password" class="font-bold py-6 ">
                     Password
                 </label>

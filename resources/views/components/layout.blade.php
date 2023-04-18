@@ -15,7 +15,12 @@
         <img src="/storage/logo.png" alt="logo" class="lg:w-52 ">
     </div>
 
-{{$slot}}
+    <div class="w-form">
+
+        {{$slot}}
+
+
+    </div>
 
 </header>
 <div class="hidden lg:block xl:flex">

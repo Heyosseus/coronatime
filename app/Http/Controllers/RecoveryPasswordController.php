@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRecoveryPasswordRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class RecoveryPasswordController extends Controller
@@ -19,15 +19,8 @@ class RecoveryPasswordController extends Controller
 		return redirect()->route('verification.reset-password')->with('failed', 'Password reset link is expired');
 	}
 
-	public function update(Request $request): RedirectResponse
+	public function update(StoreRecoveryPasswordRequest $request): RedirectResponse
 	{
-		//		dd($request->all());
-		$this->validate($request, [
-			'email'                 => 'required',
-			'password'              => 'required|min:6',
-			'password_confirmation' => 'required|same:password',
-		]);
-
 		$user = User::where('email', $request->email)->first();
 		if ($user) {
 			$user->password = Hash::make($request->password);

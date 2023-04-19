@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVerifyEmailRequest;
 use App\Mail\ResetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -18,12 +18,8 @@ class VerifyEmailController extends Controller
 		return view('verification.reset-password');
 	}
 
-	public function store(Request $request): RedirectResponse
+	public function store(StoreVerifyEmailRequest $request): RedirectResponse
 	{
-		$this->validate($request, [
-			'email' => 'required|email',
-		]);
-
 		$user = User::where('email', $request->email)->first();
 		if (!$user) {
 			return back()->with('failed', 'Failed! email is not registered.');
@@ -31,9 +27,10 @@ class VerifyEmailController extends Controller
 
 		$token = Str::random(60);
 
-		$user['token'] = $token;
-		$user['is_verified'] = 0;
-		$user->save();
+		$user->update([
+			'token'       => $token,
+			'is_verified' => 0,
+		]);
 
 		//		$token = DB::table('password_reset_tokens')->where('email', $user->email)->first();
 		Mail::to($request->email)->send(new ResetPasswordMail($token));

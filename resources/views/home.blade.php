@@ -6,7 +6,7 @@
                     <div class="absolute bg-gray-950 mt-3 ml-1 h-1 w-20"></div>
                 </a>
 
-                <a href="#" class="lg:text-xl">@lang('home.by_country')</a>
+                <a href="{{route('countries')}}" class="lg:text-xl">@lang('home.by_country')</a>
             </div>
             <div class="lg:flex lg:justify-between lg:w-cards lg:space-x-6">
                 <x-colored-card colors="bg-blue">

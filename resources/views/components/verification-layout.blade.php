@@ -9,22 +9,18 @@
 
     @vite('resources/css/app.css')
 </head>
-<body class="flex justify-between">
+<body class="w-full">
 <header class="flex-col flex">
-    <div class="flex justify-between items-center p-6 lg:px-16 lg:w-form">
-        <img src="/storage/logo.png" alt="logo" class="lg:w-52 ">
-    </div>
-
-    <div class="w-form">
-
-        {{$slot}}
-
+    <div class="flex justify-between items-center p-6 lg:px-16">
+        <img src="/storage/logo.png" alt="logo" class="lg:w-52 lg:flex   lg:mx-auto">
 
     </div>
 
+    <div class="flex items-center justify-center ">
+
+    {{$slot}}
+    </div>
 </header>
-<div class="hidden lg:block xl:flex">
-    <img src="/storage/background.svg" alt="" class="lg:ml-auto">
-</div>
+
 </body>
 </html>

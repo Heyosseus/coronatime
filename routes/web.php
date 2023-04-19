@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecoveryPasswordController;
 use App\Http\Controllers\RegisterController;
@@ -19,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');
+
+Route::controller(CountryController::class)->group(function () {
+	Route::get('/countries', [CountryController::class, 'index'])->name('countries');
+	//    Route::get('/countries/{country}', [CountryController::class, 'show'])->name('country');
+});
 
 Route::controller(RegisterController::class)->group(function () {
 	Route::get('/register', [RegisterController::class, 'create'])->name('register');

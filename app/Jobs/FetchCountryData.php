@@ -21,9 +21,30 @@ class FetchCountryData implements ShouldQueue
 	{
 	}
 
-	/**
-	 * Execute the job.
-	 */
+	private function getCountryData($code)
+	{
+		$apiResponse = Http::post('https://devtest.ge/get-country-statistics', [
+			'code' => $code,
+		]);
+
+		if ($apiResponse->ok()) {
+			return $apiResponse->json();
+		}
+
+		return null;
+	}
+
+	private function setCountryData($countryData)
+	{
+		Country::create([
+			'code'          => $countryData['code'],
+			'location'      => $countryData['country'],
+			'recovered'     => $countryData['recovered'],
+			'deaths'        => $countryData['deaths'],
+			'new_cases'     => $countryData['confirmed'],
+		]);
+	}
+
 	public function handle(): void
 	{
 		$response = Http::get('https://devtest.ge/countries');
@@ -31,19 +52,10 @@ class FetchCountryData implements ShouldQueue
 			$countries = $response->json();
 
 			foreach ($countries as $country) {
-				$code = $country['code'];
-				$apiResponse = Http::post('https://devtest.ge/get-country-statistics', [
-					'code' => $code,
-				]);
-				if ($apiResponse->ok()) {
-					$countryData = $apiResponse->json();
-					Country::create([
-						'code'          => $countryData['code'],
-						'location'      => $countryData['country'],
-						'recovered'     => $countryData['recovered'],
-						'deaths'        => $countryData['deaths'],
-						'new_cases'     => $countryData['confirmed'],
-					]);
+				$countryData = $this->getCountryData($country['code']);
+
+				if ($countryData) {
+					$this->setCountryData($countryData);
 				}
 			}
 		}

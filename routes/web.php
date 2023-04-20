@@ -23,7 +23,6 @@ Route::view('/', 'home')->name('home');
 
 Route::controller(CountryController::class)->group(function () {
 	Route::get('/countries', [CountryController::class, 'index'])->name('countries');
-	//    Route::get('/countries/{country}', [CountryController::class, 'show'])->name('country');
 });
 
 Route::controller(RegisterController::class)->group(function () {

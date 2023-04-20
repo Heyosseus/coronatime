@@ -8,7 +8,10 @@ class CountryController extends Controller
 {
 	public function index()
 	{
-		$countries = Country::all();
+		$countries = Country::latest()->get();
+		if (request('search')) {
+			$countries = Country::where('location', 'like', '%' . request('search') . '%')->get();
+		}
 		return view('country', compact('countries'));
 	}
 }

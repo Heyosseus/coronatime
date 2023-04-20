@@ -9,23 +9,26 @@
         </a>
     </div>
     <div class="lg:px-16">
-        <form action=""
+        <form action="#"  method="GET"
               class=" h-14 rounded-xl py-2 lg:px-6 lg:border lg:border-gray-300 outline-none bg-white flex items-center  mt-10 lg:w-80 ">
             <img src="/storage/search.png" alt="" class="w-6 h-6">
-            <input type="text" class="ml-4 outline-0 border-0" placeholder="Search by country">
+            <input type="text" class="ml-4 outline-0 border-0" name="search" placeholder="Search by country">
         </form>
     </div>
     </div>
     @php
-        $worldwideRecovered = 0;
-        $worldwideDeaths = 0;
         $worldwideNewCases = 0;
+         $worldwideDeaths = 0;
+           $worldwideRecovered = 0;
+
+
     @endphp
     @foreach($countries as $country)
         @php
-            $worldwideRecovered += $country['recovered'];
-            $worldwideDeaths += $country['deaths'];
             $worldwideNewCases += $country['new_cases'];
+            $worldwideDeaths += $country['deaths'];
+            $worldwideRecovered += $country['recovered'];
+
         @endphp
     @endforeach
     <div>
@@ -76,9 +79,10 @@
             <tbody class="bg-white">
             <tr class="border border-bottom ">
                 <td class=" border-b-gray-100 px-3 py-4">Worldwide</td>
-                <td class=" border-b-gray-100 px-3 py-4">{{ $worldwideRecovered }}</td>
-                <td class=" border-b-gray-100 px-3 py-4">{{ $worldwideDeaths }}</td>
                 <td class=" border-b-gray-100 px-3 py-4">{{ $worldwideNewCases }}</td>
+                <td class=" border-b-gray-100 px-3 py-4">{{ $worldwideDeaths }}</td>
+                <td class=" border-b-gray-100 px-3 py-4">{{ $worldwideRecovered }}</td>
+
             </tr>
             @foreach ($countries as $country)
                 <tr class="border border-bottom ">

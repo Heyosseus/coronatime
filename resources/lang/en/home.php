@@ -13,4 +13,5 @@ return[
 	'send'         => 'Send',
 	'logout'       => 'Logout',
 	'switch'       => 'Switch Language',
+	'search'       => 'Search by country',
 ];

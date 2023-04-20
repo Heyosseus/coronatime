@@ -1,7 +1,7 @@
 <x-dashboard-layout>
     <div class="p-6">
         <h1 class="font-extrabold text-xl lg:text-3xl lg:px-16">@lang('home.statistics')</h1>
-        <div class="flex space-x-6 mt-5 lg:mt-10 lg:px-16"
+        <div class="flex space-x-6 mt-5 lg:mt-10 lg:px-16
         ">
         <a href="{{route('home')}}" class="lg:text-xl">@lang('home.worldwide')</a>
         <a href="#" class="font-bold relative lg:text-xl"> @lang('home.by_country')
@@ -12,7 +12,7 @@
         <form action="#"  method="GET"
               class=" h-14 rounded-xl py-2 lg:px-6 lg:border lg:border-gray-300 outline-none bg-white flex items-center  mt-10 lg:w-80 ">
             <img src="/storage/search.png" alt="" class="w-6 h-6">
-            <input type="text" class="ml-4 outline-0 border-0" name="search" placeholder="Search by country">
+            <input type="text" class="ml-4 outline-0 border-0" name="search" placeholder="@lang('home.search')">
         </form>
     </div>
     </div>

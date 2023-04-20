@@ -44,12 +44,12 @@
                 <x-colored-card colors="gradient-blue">
                     <div class="py-4">
                         <h1 class="text-2xl font-bold text-center mt-2 lg:text-3xl">@lang('home.notify')</h1>
-                        <p class="text-center mt-4 text-lg ">Get <span class="font-bold">personalised </span> notifications
-                            via email</p>
+                        <p class="text-center mt-4 text-lg ">
+                           @lang('home.personalised')</p>
                         <form action=""
                               class="w-form h-14 rounded-full border-0 outline-none px-4 bg-white flex justify-center items-center mx-auto mt-10 mb-4 ">
                             <img src="/storage/search.png" alt="" class="w-5 h-5 ">
-                            <input type="text" class="ml-2 outline-0 border-0" placeholder="Enter your email">
+                            <input type="text" class="ml-2 outline-0 border-0" placeholder="@lang('register.enter_email')">
                             <button class="bg-[#0FBA68] text-white rounded-3xl h-10 w-20 ml-2 uppercase font-bold text-sm ">
                                 @lang('home.send')
                             </button>

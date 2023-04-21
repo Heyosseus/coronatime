@@ -29,3 +29,18 @@
     }
 
 }
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 56px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 8px;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 100vh;
+    }
+
+}

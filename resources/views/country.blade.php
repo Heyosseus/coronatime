@@ -32,7 +32,8 @@
         @endphp
     @endforeach
     <div>
-        <table class="table-fixed bg-gray-50 px-4 text-sm h-full lg:mx-auto lg:ml-20 lg:mt-10 lg:text-lg lg:w-[1240px]">
+    <div class="overflow-y-auto max-h-[55vh] w-fit scrollbar-thumb-[#808189] scrollbar-track-gray-200 scrollbar ">
+        <table class="table w-full bg-gray-50 px-4 text-sm h-full lg:mx-auto lg:ml-20  lg:text-lg lg:w-[1240px]">
             <thead>
             <tr class="bg-gray-100 ">
                 <th class="w-1/4 px-2 py-2 text-left lg:py-4 lg:px-3 ">
@@ -96,6 +97,7 @@
             </tbody>
         </table>
     </div>
+
 </x-dashboard-layout>
 
 

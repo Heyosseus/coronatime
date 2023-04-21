@@ -39,8 +39,7 @@
         </div>
 
 
-        <button type="submit" class="bg-green-600 text-white p-3 mt-10 rounded hover:bg-blue-400 font-bold">@lang('login.login')
-        </button>
+        <button type="submit" class="bg-green-600 text-white p-3 mt-10 rounded hover:bg-blue-400 font-bold">@lang('login.login')</button>
 
 
 
@@ -59,6 +58,9 @@
                 </div>
             </div>
         </form>
+        @if(session('success'))
+            <p class="text-green-500">{{ session('success') }}</p>
+        @endif
 
     </div>
 

@@ -20,16 +20,16 @@ module.exports = {
             'text-blue' : '#2029F3',
             'text-green': '#249E2C',
             'text-yellow': '#EAD621',
-            'bg-blue': '#2029F31A',
-            'bg-green': '#249E2C1A',
-            'bg-yellow': '#EAD6211A',
+            'blue_bg': '#2029F31A',
+            'green_bg': '#249E2C1A',
+            'yellow_bg': '#EAD6211A',
         },
         backgroundImage: theme => ({
             'gradient-blue': 'linear-gradient(109.6deg, #FCFF81 -18.12%, #C2FF9D 47.7%, #75A4FF 114.98%)',
         }),
         boxShadow: {
           'shadow':  "1px 2px 8px rgba(0, 0, 0, 0.04)"
-        }
+        },
 
     },
   },
@@ -37,6 +37,7 @@ module.exports = {
       require('@tailwindcss/forms')({
           strategy: 'class', // only generate classes
       }),
+      require('tailwind-scrollbar'),
   ],
 }
 

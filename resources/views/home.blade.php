@@ -10,7 +10,7 @@
             </div>
             <div class="lg:flex lg:justify-between lg:w-cards lg:space-x-6">
 
-                <x-colored-card colors="blue">
+                <x-colored-card colors="blue_bg">
                     <div class="flex flex-col justify-center items-center text-xl p-6 lg:w-form lg:p-8 ">
                         <img src="/storage/chart.png" alt="" width="120">
                         <h1 class="mt-4 font-bold">@lang('home.new_cases')</h1>
@@ -20,7 +20,7 @@
 
 
                 <div class="flex space-x-4 w-full lg:space-x-6 ">
-                    <x-colored-card colors="green">
+                    <x-colored-card colors="green_bg">
                         <div class="flex flex-col justify-center items-center w-28 text-xl lg:w-form lg:p-8">
                             <img src="/storage/chart-2.png" alt="" width="100">
                             <div class="mt-5">
@@ -30,7 +30,7 @@
                         </div>
                     </x-colored-card>
 
-                    <x-colored-card colors="yellow">
+                    <x-colored-card colors="yellow_bg">
                         <div class="flex flex-col justify-center items-center w-28 text-xl p-6 lg:w-form lg:p-8">
                             <img src="/storage/chart-3.png" alt="">
                             <div class="mt-4">

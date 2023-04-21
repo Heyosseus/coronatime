@@ -20,9 +20,9 @@ module.exports = {
             'text-blue' : '#2029F3',
             'text-green': '#249E2C',
             'text-yellow': '#EAD621',
-            'blue': '#2029F31A',
-            'green': '#249E2C1A',
-            'yellow': '#EAD6211A',
+            'blue_bg': '#2029F31A',
+            'green_bg': '#249E2C1A',
+            'yellow_bg': '#EAD6211A',
         },
         backgroundImage: theme => ({
             'gradient-blue': 'linear-gradient(109.6deg, #FCFF81 -18.12%, #C2FF9D 47.7%, #75A4FF 114.98%)',

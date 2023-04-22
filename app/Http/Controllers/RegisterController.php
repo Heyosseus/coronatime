@@ -31,6 +31,6 @@ class RegisterController extends Controller
 		$user->remember_device = $rememberDevice;
 		$user->save();
 
-		return redirect('/')->with('success', 'Your account has been created!');
+		return redirect()->route('login')->with('success', 'Your account has been created!');
 	}
 }

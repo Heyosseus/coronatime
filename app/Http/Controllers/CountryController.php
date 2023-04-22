@@ -4,19 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 
-//class CountryController extends Controller
-//{
-//	public function index()
-//	{
-//		$countries = Country::first()->get();
-//		if (request('search')) {
-//			$countries = Country::where('location', 'like', '%' . request('search') . '%')->get();
-//		}
-//		return view('country', compact('countries'));
-//	}
-//}
 class CountryController extends Controller
 {
+	public function create()
+	{
+		$countries = Country::all();
+
+		return view('home', compact('countries'));
+	}
+
 	public function index()
 	{
 		$sortBy = request('sort_by', 'location');

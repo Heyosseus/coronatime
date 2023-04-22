@@ -1,7 +1,7 @@
 <x-layout>
     <div class="lg:px-12 ">
-        <h1 class="font-bold px-6 text-2xl">@lang('login.welcome')</h1>
-        <p class="text-sm px-6 mt-3">@lang('login.paragraph')</p>
+        <h1 class="font-bold px-6 text-2xl w-[444px]">@lang('login.welcome')</h1>
+        <p class="text-sm px-6 mt-3 w-form" >@lang('login.paragraph')</p>
 
         <form action="{{route('post_login')}}" method="POST" class="flex flex-col px-6 lg:w-login-form ">
         @csrf

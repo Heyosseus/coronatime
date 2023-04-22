@@ -19,20 +19,30 @@
     <div class="flex justify-between items-center p-6 ">
         <img src="/storage/logo.png" alt="logo" class="lg:w-56">
         <div class="flex justify-between items-center lg:text-lg">
-
             <div class="flex items-center justify-center space-x-3 w-25 mr-9">
-                <a class="rounded-full bg-bg-blue py-3 px-3.5 text-sm">
-                    {{ Config::get('languages')[App::getLocale()] }}
-                </a>
-                <div class="rounded-full bg-bg-blue  py-3 px-3.5  text-sm ">
-                    @foreach (Config::get('languages') as $lang => $language)
-                        @if ($lang != App::getLocale())
-                            <a class="" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
-                        @endif
-                    @endforeach
+                <div x-data="{ open: false }">
+                    <div class="relative mr-9">
+
+                        <button x-on:click="open = !open" class="text-black py-2 rounded ">
+                            <div class="flex items-center justify-center space-x-2">
+                                <p>{{ Config::get('languages')[App::getLocale()] }}</p>
+                                <img src="/storage/arrow.png" alt="" class="w-3 h-2">
+                            </div>
+
+                        </button>
+                        <div x-show="open" class="absolute bg-gray-100 border border-gray-200 mt-2 py-2 rounded w-28 ">
+                            <template x-for="(language, code) in {{ json_encode(Config::get('languages')) }}"
+                                      :key="code">
+                                <a :href="`{{ route('lang.switch', '') }}/${code}`"
+                                   class="block px-4 py-2 text-gray-800 text-sm " x-text="language"
+                                   :class="{ 'bg-blue-300': code === '{{ App::getLocale() }}', 'text-white': code === '{{ App::getLocale() }}' }"></a>
+                            </template>
+                        </div>
+                    </div>
                 </div>
 
             </div>
+
 
             <div x-data="{ show: false }">
 
@@ -47,12 +57,12 @@
                         <form action="{{ route('logout') }}" method="POST"
                               class="fixed right-1 py-2  px-16 mt-10 rounded font-bold">
                             @csrf
-                            <button type="submit" class="uppercase text-center">Logout</button>
+                            <button type="submit" class="uppercase text-center">@lang('login.logout')</button>
                         </form>
 
                     @else
                         <a href="{{route('login')}}"
-                           class="fixed right-5 py-2 bg-gray-300 px-16 mt-4 rounded uppercase font-bold">Log in</a>
+                           class="fixed right-5 py-2 bg-gray-300 px-16 mt-4 rounded uppercase font-bold">@lang('login.login')</a>
                     @endif
                 </div>
                 <div class="hidden lg:block">
@@ -62,7 +72,7 @@
                             <div class="w-0.5 h-6 bg-gray-400 "></div>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit">Logout</button>
+                                <button type="submit">@lang('login.logout')</button>
                             </form>
                         </div>
                     @endif

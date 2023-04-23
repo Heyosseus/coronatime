@@ -30,7 +30,7 @@ class FetchCountries extends Command
 		return null;
 	}
 
-	private function setCountryData($countryData)
+	private function setCountryData($countryData): void
 	{
 		Country::create([
 			'code'          => $countryData['code'],
@@ -41,19 +41,19 @@ class FetchCountries extends Command
 		]);
 	}
 
-	public function handle(): void
-	{
-		$response = Http::get('https://devtest.ge/countries');
-		if ($response->ok()) {
-			$countries = $response->json();
+		public function handle(): void
+		{
+			$response = Http::get('https://devtest.ge/countries');
+			if ($response->ok()) {
+				$countries = $response->json();
 
-			foreach ($countries as $country) {
-				$countryData = $this->getCountryData($country['code']);
+				foreach ($countries as $country) {
+					$countryData = $this->getCountryData($country['code']);
 
-				if ($countryData) {
-					$this->setCountryData($countryData);
+					if ($countryData) {
+						$this->setCountryData($countryData);
+					}
 				}
 			}
 		}
-	}
 }

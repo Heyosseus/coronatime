@@ -37,13 +37,13 @@
                 <thead>
                 <tr class="bg-gray-100 ">
                     <th class="w-1/4 px-2 py-2 text-left lg:py-4 lg:px-3 ">
-                        <div class="flex items-center">
+                        <div class="flex items-center "  x-data="{activeTab: 0}">
                             <p>Location</p>
-                            <form action="" method="GET">
+                            <form  method="GET" x-ref="form">
                                 <input type="hidden" name="sort_by" value="location">
-                                <button type="submit" name="sort_order" value="{{$newSortOrder}}">
-                                    <img src="/storage/up.png" alt="" class="ml-2 w-2 h-2" >
-                                    <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2">
+                                <button type="submit" name="sort_order" value="{{$newSortOrder}}" >
+                                    <img src="/storage/up.png" alt="" class="ml-2 w-2 h-2 "  @click="activeTab = 0" :class="{'active' : activeTab === 0 }">
+                                    <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2" @click="activeTab = 1" :class="{'active' : activeTab === 1 }" >
                                 </button>
                             </form>
                         </div>

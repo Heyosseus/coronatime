@@ -30,15 +30,40 @@ class FetchCountries extends Command
 		return null;
 	}
 
+	private function getCountryInfo($code)
+	{
+		$apiResponse = Http::get('https://devtest.ge/countries');
+
+		if ($apiResponse->ok()) {
+			$countries = $apiResponse->json();
+
+			foreach ($countries as $country) {
+				if ($country['code'] === $code) {
+					return $country;
+				}
+			}
+		}
+
+		return null;
+	}
+
 	private function setCountryData($countryData): void
 	{
-		Country::create([
-			'code'          => $countryData['code'],
-			'location'      => $countryData['country'],
-			'recovered'     => $countryData['recovered'],
-			'deaths'        => $countryData['deaths'],
-			'new_cases'     => $countryData['confirmed'],
-		]);
+		$countryInfo = $this->getCountryInfo($countryData['code']);
+
+		if ($countryInfo) {
+			Country::updateOrCreate([
+				'code' => $countryData['code'],
+			], [
+				'location' => json_encode([
+					'en' => $countryInfo['name']['en'],
+					'ka' => $countryInfo['name']['ka'],
+				]),
+				'recovered' => $countryData['recovered'],
+				'deaths'    => $countryData['deaths'],
+				'new_cases' => $countryData['confirmed'],
+			]);
+		}
 	}
 
 		public function handle(): void

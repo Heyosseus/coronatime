@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
@@ -13,7 +14,7 @@ class CountryController extends Controller
 		return view('home', compact('countries'));
 	}
 
-	public function index()
+	public function index(Request $request)
 	{
 		$sortBy = request('sort_by', 'location');
 		$sortOrder = request('sort_order', 'asc');
@@ -21,7 +22,7 @@ class CountryController extends Controller
 		// Determine the new sort order to be used for the sorting buttons
 		$newSortOrder = ($sortOrder === 'asc') ? 'desc' : 'asc';
 
-		// Retrieve the countries from the database, sorted by the selected column and order
+		//		 Retrieve the countries from the database, sorted by the selected column and order
 		$query = Country::query();
 		switch ($sortBy) {
 			case 'new_cases':
@@ -34,14 +35,23 @@ class CountryController extends Controller
 				$query->orderBy('deaths', $sortOrder);
 				break;
 			default:
-				$query->orderBy('location', $sortOrder);
+				$query->orderByRaw("JSON_UNQUOTE(JSON_EXTRACT(location, '$.en')) $sortOrder");
 		}
+
 		if (request('search')) {
-			$query->where('location', 'like', '%' . request('search') . '%');
+			$searchTerm = '%' . request('search') . '%';
+			$query->whereRaw("JSON_EXTRACT(location, '$.en') LIKE ?", [$searchTerm])
+				->orWhereRaw("JSON_EXTRACT(location, '$.ka') LIKE ?", [$searchTerm]);
 		}
+
 		$countries = $query->get();
 
-		// Pass the data to the view
-		return view('country', compact('countries', 'sortBy', 'sortOrder', 'newSortOrder'));
+		$locations = [];
+
+		foreach ($countries as $country) {
+			$locations[$country->code] = json_decode($country->location, true);
+		}
+
+		return view('country', compact('countries', 'sortBy', 'sortOrder', 'newSortOrder', 'locations'));
 	}
 }

@@ -25,7 +25,7 @@
             @endforeach
             <div class="lg:flex lg:justify-between lg:w-cards lg:space-x-6">
 
-                <x-colored-card colors="blue_bg">
+                <x-colored-card color="blue_bg">
                     <div class="flex flex-col justify-center items-center text-xl p-6 lg:w-form lg:p-8 ">
                         <img src="/storage/chart.png" alt="" width="120">
                         <h1 class="mt-4 font-bold text-center text-sm lg:text-xl">@lang('home.new_cases')</h1>
@@ -35,7 +35,7 @@
 
 
                 <div class="flex space-x-4 w-full lg:space-x-6 ">
-                    <x-colored-card colors="green_bg">
+                    <x-colored-card color="green_bg">
                         <div class="flex flex-col justify-center items-center w-28 text-xl lg:w-form lg:p-8">
                             <img src="/storage/chart-2.png" alt="" width="100">
                             <div class="mt-5">
@@ -45,7 +45,7 @@
                         </div>
                     </x-colored-card>
 
-                    <x-colored-card colors="yellow_bg">
+                    <x-colored-card color="yellow_bg">
                         <div class="flex flex-col justify-center items-center w-28 text-xl p-6 lg:w-form lg:p-8">
                             <img src="/storage/chart-3.png" alt="">
                             <div class="mt-4">
@@ -58,7 +58,7 @@
             </div>
 
             <div class="hidden lg:block lg:mr-4 bg-gradient-blue rounded-xl">
-                <x-colored-card colors="gradient-blue">
+                <x-colored-card color="gradient-blue">
                     <div class="py-4">
                         <h1 class="text-2xl font-bold text-center mt-2 lg:text-3xl">@lang('home.notify')</h1>
                         <p class="text-center mt-4 text-lg ">

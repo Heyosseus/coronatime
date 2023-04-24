@@ -46,6 +46,7 @@
                                     <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2" @click="activeTab = 1" :class="{'active' : activeTab === 1 }" >
                                 </button>
                             </form>
+
                         </div>
 
                     </th>
@@ -99,7 +100,13 @@
                 </tr>
                 @foreach ($countries as $country)
                     <tr class="border border-bottom ">
-                        <td class=" border-b-gray-100 px-3 py-4">{{ $country['location'] }}</td>
+                        <td class=" border-b-gray-100 px-3 py-4">
+                            @if(app()->getLocale() == 'en')
+                                {{ $locations[$country->code]['en'] }}
+                            @else
+                                {{ $locations[$country->code]['ka'] }}
+                            @endif</td>
+
                         <td class=" border-b-gray-100 px-4 py-4">{{ $country['new_cases'] }}</td>
                         <td class=" border-b-gray-100 px-4 py-4">{{ $country['deaths'] }}</td>
                         <td class=" border-b-gray-100 px-4 py-4">{{ $country['recovered'] }}</td>
@@ -109,7 +116,7 @@
                 </tbody>
             </table>
         </div>
-
+    </div>
 </x-dashboard-layout>
 
 

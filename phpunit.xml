@@ -16,6 +16,13 @@
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <exclude>
+            <directory>./app/Http/Middleware</directory>
+            <directory>./app/Exceptions</directory>
+            <directory>./app/Providers</directory>
+            <file>./app/Console/kernel.php</file>
+            <file>./app/Http/Controllers/Controller.php</file>
+        </exclude>
     </coverage>
     <php>
         <env name="APP_ENV" value="testing"/>

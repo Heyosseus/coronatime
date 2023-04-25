@@ -30,4 +30,4 @@ There is information about confirmed cases, deaths, and recoveries in different 
 
 **# DrawSQL Diagram**
 
-![DrawSQL Diagram](https://drawsql.app/teams/rati-rukhadzes-team/diagrams/corona-time/embed
+![DrawSQL Diagram](https://drawsql.app/teams/rati-rukhadzes-team/diagrams/corona-time/embed)

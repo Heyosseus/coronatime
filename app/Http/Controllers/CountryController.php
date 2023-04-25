@@ -17,37 +17,32 @@ class CountryController extends Controller
 	public function index(Request $request)
 	{
 		$sortBy = request('sort_by', 'location');
-		$sortOrder = request('sort_order', 'asc');
+		$sortDirection = request('sort_order', 'asc');
 
 		// Determine the new sort order to be used for the sorting buttons
-		$newSortOrder = ($sortOrder === 'asc') ? 'desc' : 'asc';
+		$newSortDirection = ($sortDirection === 'asc') ? 'desc' : 'asc';
 
 		//		 Retrieve the countries from the database, sorted by the selected column and order
 		$query = Country::query();
 		switch ($sortBy) {
 			case 'new_cases':
-				$query->orderBy('new_cases', $sortOrder);
+				$query->orderBy('new_cases', $sortDirection);
 				break;
 			case 'recovered':
-				$query->orderBy('recovered', $sortOrder);
+				$query->orderBy('recovered', $sortDirection);
 				break;
 			case 'deaths':
-				$query->orderBy('deaths', $sortOrder);
+				$query->orderBy('deaths', $sortDirection);
 				break;
 			default:
-				$query->orderByRaw("JSON_UNQUOTE(JSON_EXTRACT(location, '$.en')) $sortOrder");
+				$query->orderByRaw("JSON_UNQUOTE(JSON_EXTRACT(location, '$.en')) $sortDirection");
 		}
 
 		if (request('search')) {
-			$searchTerm = '%' . request('search') . '%';
-			$query->whereRaw("JSON_EXTRACT(location, '$.en') LIKE ?", [$searchTerm])
-				->orWhereRaw("JSON_EXTRACT(location, '$.ka') LIKE ?", [$searchTerm]);
+			$searchTerm = '%' . ucfirst(request('search')) . '%';
+			$query->where('location->en', 'LIKE', $searchTerm)
+				->orWhere('location->ka', 'LIKE', $searchTerm);
 		}
-		//		if (request('search')) {
-		//			$searchTerm = '%' . request('search') . '%';
-		//			$query->where('location->en', [$searchTerm])
-		//				->orWhere('location->ka', [$searchTerm]);
-		//		}
 
 		$countries = $query->get();
 
@@ -57,6 +52,6 @@ class CountryController extends Controller
 			$locations[$country->code] = json_decode($country->location, true);
 		}
 
-		return view('country', compact('countries', 'sortBy', 'sortOrder', 'newSortOrder', 'locations'));
+		return view('country', compact('countries', 'sortBy', 'sortDirection', 'newSortDirection', 'locations'));
 	}
 }

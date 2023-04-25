@@ -8,42 +8,57 @@
 
                 <a href="{{route('countries')}}" class="lg:text-xl">@lang('home.by_country')</a>
             </div>
+            @php
+                $worldwideNewCases = 0;
+                 $worldwideDeaths = 0;
+                 $worldwideRecovered = 0;
+
+
+            @endphp
+            @foreach($countries as $country)
+                @php
+                    $worldwideNewCases += $country['new_cases'];
+                    $worldwideDeaths += $country['deaths'];
+                    $worldwideRecovered += $country['recovered'];
+
+                @endphp
+            @endforeach
             <div class="lg:flex lg:justify-between lg:w-cards lg:space-x-6">
 
-                <x-colored-card colors="blue_bg">
+                <div class="mt-10 p-6 bg-blue_bg rounded-2xl shadow ">
                     <div class="flex flex-col justify-center items-center text-xl p-6 lg:w-form lg:p-8 ">
                         <img src="/storage/chart.png" alt="" width="120">
-                        <h1 class="mt-4 font-bold">@lang('home.new_cases')</h1>
-                        <p class="text-text-blue font-bold lg:text-3xl mt-6">715,523</p>
+                        <h1 class="mt-4 font-bold text-center text-sm lg:text-xl">@lang('home.new_cases')</h1>
+                        <p class="text-text-blue font-bold mt-2 lg:text-3xl lg:mt-5">{{number_format($worldwideNewCases)}}</p>
                     </div>
-                </x-colored-card>
+                </div>
 
 
                 <div class="flex space-x-4 w-full lg:space-x-6 ">
-                    <x-colored-card colors="green_bg">
+                    <div class="mt-10 p-6 bg-green_bg rounded-2xl shadow ">
                         <div class="flex flex-col justify-center items-center w-28 text-xl lg:w-form lg:p-8">
                             <img src="/storage/chart-2.png" alt="" width="100">
                             <div class="mt-5">
-                                <h1 class="mt-5 font-bold">@lang('home.recovered')</h1>
-                                <div class="text-text-green text-center font-bold lg:text-3xl mt-3">82,332</div>
+                                <h1 class="mt-5 font-bold text-center text-sm lg:text-xl">@lang('home.recovered')</h1>
+                                <div class="text-text-green text-center font-bold lg:text-3xl mt-3">{{number_format($worldwideRecovered)}}</div>
                             </div>
                         </div>
-                    </x-colored-card>
+                        </div>
 
-                    <x-colored-card colors="yellow_bg">
+                    <div class="mt-10 p-6 bg-yellow_bg rounded-2xl shadow ">
                         <div class="flex flex-col justify-center items-center w-28 text-xl p-6 lg:w-form lg:p-8">
                             <img src="/storage/chart-3.png" alt="">
                             <div class="mt-4">
-                                <h1 class="mt-4 font-bold">@lang('home.death')</h1>
-                                <p class="text-text-yellow font-bold lg:text-3xl mt-2">8,332</p>
+                                <h1 class="lg:mt-6  mt-4 font-bold text-center text-sm lg:text-xl">@lang('home.death')</h1>
+                                <p class="text-text-yellow font-bold mt-2 lg:text-3xl lg:mt-3">{{number_format($worldwideDeaths)}}</p>
                             </div>
                         </div>
-                    </x-colored-card>
+                    </div>
                 </div>
             </div>
 
             <div class="hidden lg:block lg:mr-4 bg-gradient-blue rounded-xl">
-                <x-colored-card colors="gradient-blue">
+                <x-colored-card color="gradient-blue">
                     <div class="py-4">
                         <h1 class="text-2xl font-bold text-center mt-2 lg:text-3xl">@lang('home.notify')</h1>
                         <p class="text-center mt-4 text-lg ">

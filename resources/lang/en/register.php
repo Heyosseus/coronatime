@@ -15,4 +15,5 @@ return[
 	'enter_email'      => 'Enter your email',
 	'enter_password'   => 'Fill in password',
 	'enter_repeat'     => 'Repeat  password',
+	'reset_pass_email' => 'This email is not registered',
 ];

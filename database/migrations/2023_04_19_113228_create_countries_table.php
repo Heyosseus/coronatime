@@ -12,11 +12,11 @@ return new class extends Migration {
 	{
 		Schema::create('countries', function (Blueprint $table) {
 			$table->id();
-			$table->string('location');
+			$table->json('location');
 			$table->string('code');
-			$table->string('recovered');
-			$table->string('deaths');
-			$table->string('new_cases');
+			$table->integer('recovered');
+			$table->integer('deaths');
+			$table->integer('new_cases');
 			$table->timestamps();
 		});
 	}

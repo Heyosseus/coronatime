@@ -19,10 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'home')->name('home');
-
 Route::controller(CountryController::class)->group(function () {
 	Route::get('/countries', [CountryController::class, 'index'])->name('countries');
+	Route::get('/', [CountryController::class, 'create'])->name('home');
 });
 
 Route::controller(RegisterController::class)->group(function () {
@@ -55,3 +54,4 @@ Route::view('/email-verification', 'emails.confirm-reset-password')->name('email
 
 //for localization
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+Route::post('lang', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang'])->name('lang');

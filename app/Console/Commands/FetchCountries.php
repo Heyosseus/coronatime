@@ -30,30 +30,55 @@ class FetchCountries extends Command
 		return null;
 	}
 
-	private function setCountryData($countryData)
+	private function getCountryInfo($code)
 	{
-		Country::create([
-			'code'          => $countryData['code'],
-			'location'      => $countryData['country'],
-			'recovered'     => $countryData['recovered'],
-			'deaths'        => $countryData['deaths'],
-			'new_cases'     => $countryData['confirmed'],
-		]);
-	}
+		$apiResponse = Http::get('https://devtest.ge/countries');
 
-	public function handle(): void
-	{
-		$response = Http::get('https://devtest.ge/countries');
-		if ($response->ok()) {
-			$countries = $response->json();
+		if ($apiResponse->ok()) {
+			$countries = $apiResponse->json();
 
 			foreach ($countries as $country) {
-				$countryData = $this->getCountryData($country['code']);
-
-				if ($countryData) {
-					$this->setCountryData($countryData);
+				if ($country['code'] === $code) {
+					return $country;
 				}
 			}
 		}
+
+		return null;
 	}
+
+	private function setCountryData($countryData): void
+	{
+		$countryInfo = $this->getCountryInfo($countryData['code']);
+
+		if ($countryInfo) {
+			Country::updateOrCreate([
+				'code' => $countryData['code'],
+			], [
+				'location' => json_encode([
+					'en' => $countryInfo['name']['en'],
+					'ka' => $countryInfo['name']['ka'],
+				]),
+				'recovered' => $countryData['recovered'],
+				'deaths'    => $countryData['deaths'],
+				'new_cases' => $countryData['confirmed'],
+			]);
+		}
+	}
+
+		public function handle(): void
+		{
+			$response = Http::get('https://devtest.ge/countries');
+			if ($response->ok()) {
+				$countries = $response->json();
+
+				foreach ($countries as $country) {
+					$countryData = $this->getCountryData($country['code']);
+
+					if ($countryData) {
+						$this->setCountryData($countryData);
+					}
+				}
+			}
+		}
 }

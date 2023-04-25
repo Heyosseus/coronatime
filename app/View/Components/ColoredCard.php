@@ -7,11 +7,11 @@ use Illuminate\View\View;
 
 class ColoredCard extends Component
 {
-	public $colors;
+	public $color;
 
-	public function __construct($colors)
+	public function __construct($color)
 	{
-		$this->colors = $colors;
+		$this->color = $color;
 	}
 
 	public function render(): View

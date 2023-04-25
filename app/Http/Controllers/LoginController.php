@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLoginRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-	public function create()
+	public function create(): View
 	{
 		return view('auth.login');
 	}
@@ -17,17 +17,14 @@ class LoginController extends Controller
 	{
 		$attributes = $request->validated();
 
-		if (!auth()->attempt($attributes)) {
-			throw ValidationException::withMessages([
-				'name'     => 'Your provided credentials could not be verified.',
-				'password' => 'Your provided credentials could not be verified.',
-			]);
+		if (auth()->attempt($attributes)) {
+			$request->session()->regenerate();
+
+			session()->flash('status', 'Welcome Back!');
+			return redirect()->route('home');
 		}
-		session()->regenerate();
 
-		session()->flash('status', 'Welcome Back!');
-
-		return redirect()->route('home');
+		return back()->withErrors(['name' => 'Your provided credentials could not be verified.']);
 	}
 
 	public function destroy(): RedirectResponse

@@ -18,9 +18,11 @@
         </include>
         <exclude>
             <directory>./app/Http/Middleware</directory>
-            <directory>./app/Exceptions</directory>
+            <directory>./app/Http/Exceptions</directory>
             <directory>./app/Providers</directory>
-            <file>./app/Console/kernel.php</file>
+            <directory>./app/View/Components</directory>
+            <file>./app/Console/Kernel.php</file>
+            <file>./app/Http/Kernel.php</file>
             <file>./app/Http/Controllers/Controller.php</file>
         </exclude>
     </coverage>

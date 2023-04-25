@@ -9,11 +9,11 @@
                 @lang('register.username')
             </label>
             <input type="text" name="name" id="name" placeholder="@lang('register.enter_name')"
-                   class="@if($errors->has('name')) border-red-500 @elseif(! $errors->any()) border-gray-300 @endif p-4 rounded-lg w-full form-input"
-{{--                   style="background-image: url(@if(!$errors->has('name'))'/storage/valid.png' @endif); background-repeat: no-repeat; background-position: right 10px center"--}}
+                   class="p-4 rounded-lg w-full form-input
+                  @if($errors->has('name')) border-red-500
+                  @elseif(! $errors->any() && ! old('name')) border-gray-300
+                  @else border-green-500 @endif"
             >
-
-
             @if($errors->has('name'))
                 <div class="flex space-x-1">
                     <img src="/storage/invalid.png" alt="" width="20" height="10">
@@ -26,8 +26,10 @@
                 @lang('register.email')
             </label>
             <input type="email" name="email" id="email" placeholder="@lang('register.enter_email')"
-                   class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
-{{--                   style="background-image: url(@if(!$errors->has('name'))'/storage/valid.png' @endif); background-repeat: no-repeat; background-position: right 10px center"--}}
+                   class="p-4 rounded-lg w-full form-input
+                  @if($errors->has('email')) border-red-500
+                  @elseif(! $errors->any() && ! old('email')) border-gray-300
+                  @else border-green-500 @endif"
             >
             @error( 'email' )
             <div class="flex space-x-1">
@@ -40,8 +42,10 @@
                 @lang('register.password')
             </label>
             <input type="password" name="password" id="password" placeholder="@lang('register.enter_password')"
-                   class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
-{{--                   style="background-image: url(@if(!$errors->has('name'))'/storage/valid.png' @endif); background-repeat: no-repeat; background-position: right 10px center"--}}
+                   class="p-4 rounded-lg w-full form-input
+                  @if($errors->has('name')) border-red-500
+                  @elseif(! $errors->any() && ! old('password')) border-gray-300
+                  @else border-green-500 @endif"
             >
             @error( 'password' )
             <div class="flex space-x-1">
@@ -54,8 +58,10 @@
                 @lang('register.repeat')
             </label>
             <input type="password" name="password_confirmation" id="password_confirmation" placeholder="@lang('register.repeat')"
-                   class="border-2 border-gray-300 p-4 rounded-lg w-full form-input"
-{{--                   style="background-image: url(@if(!$errors->has('name'))'/storage/valid.png' @endif); background-repeat: no-repeat; background-position: right 10px center"--}}
+                   class="p-4 rounded-lg w-full form-input
+                  @if($errors->has('password_confirmation')) border-red-500
+                  @elseif(! $errors->any() && ! old('password_confirmation')) border-gray-300
+                  @else border-green-500 @endif"
             >
             @error( 'password_confirmation' )
             <div class="flex space-x-1">

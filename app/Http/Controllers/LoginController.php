@@ -19,7 +19,8 @@ class LoginController extends Controller
 
 		if (!auth()->attempt($attributes)) {
 			throw ValidationException::withMessages([
-				'name' => 'Your provided credentials could not be verified.',
+				'name'     => 'Your provided credentials could not be verified.',
+				'password' => 'Your provided credentials could not be verified.',
 			]);
 		}
 		session()->regenerate();

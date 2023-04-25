@@ -43,6 +43,11 @@ class CountryController extends Controller
 			$query->whereRaw("JSON_EXTRACT(location, '$.en') LIKE ?", [$searchTerm])
 				->orWhereRaw("JSON_EXTRACT(location, '$.ka') LIKE ?", [$searchTerm]);
 		}
+		//		if (request('search')) {
+		//			$searchTerm = '%' . request('search') . '%';
+		//			$query->where('location->en', [$searchTerm])
+		//				->orWhere('location->ka', [$searchTerm]);
+		//		}
 
 		$countries = $query->get();
 

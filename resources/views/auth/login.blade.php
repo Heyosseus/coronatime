@@ -11,7 +11,7 @@
             <input type="text" name="name" id="name" placeholder="@lang('login.enter_username')"
                    class="p-4 rounded-lg w-full form-input
                   @if($errors->has('name')) border-red-500
-                  @elseif(! $errors->any() && ! old('password')) border-gray-300
+                  @elseif(! $errors->any() && ! old('name')) border-gray-300
                   @else border-green-500 @endif">
 
             @if($errors->has('name'))

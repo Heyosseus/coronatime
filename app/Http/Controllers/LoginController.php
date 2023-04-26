@@ -31,6 +31,6 @@ class LoginController extends Controller
 	{
 		auth()->logout();
 
-		return redirect()->route('home')->with('success', 'Goodbye!');
+		return redirect()->route('login')->with('success', 'Goodbye!');
 	}
 }

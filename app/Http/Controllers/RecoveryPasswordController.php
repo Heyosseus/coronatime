@@ -16,7 +16,7 @@ class RecoveryPasswordController extends Controller
 			$email = $user->email;
 			return view('verification.new-password', compact('email', 'token'));
 		}
-		return redirect()->route('verification.reset-password')->with('failed', 'Password reset link is expired');
+		return redirect()->route('reset_password')->with('failed', 'Password reset link is expired');
 	}
 
 	public function update(StoreRecoveryPasswordRequest $request): RedirectResponse

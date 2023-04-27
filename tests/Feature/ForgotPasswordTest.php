@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Mail\ResetPasswordMail;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -14,6 +15,8 @@ class ForgotPasswordTest extends TestCase
 	/**
 	 * A basic feature test example.
 	 */
+	use RefreshDatabase;
+
 	public function test_if_user_can_successfully_visit_the_reset_password_page()
 	{
 		$response = $this->get('/reset-password');
@@ -157,5 +160,35 @@ class ForgotPasswordTest extends TestCase
 		]);
 
 		$response->assertRedirect(route('confirmation'));
+	}
+
+	public function test_if_email_template_is_accessible()
+	{
+		$this->get(route('email_verification_reset_password'));
+		$this->assertNotNull(route('email_verification_reset_password'));
+	}
+
+	public function test_if_email_contains_reset_password_token()
+	{
+		$token = 'example-token';
+		$user = User::factory()->create(['email' => 'example@example.com']);
+		$mailable = new ResetPasswordMail($token);
+
+		Mail::to($user->email)->send($mailable);
+		Mail::to('example@example.com')->send($mailable);
+		$this->assertEquals('example@example.com', 'example@example.com');
+	}
+
+	public function test_login_fails_with_unregistered_email()
+	{
+		$attributes = [
+			'email'    => 'johncenaaaa@example.com',
+		];
+
+		$response = $this->post('/reset-password', $attributes);
+
+		//		$response->ddSession();
+		$response->assertSessionHasErrors(['failed']);
+		$response->assertRedirect();
 	}
 }

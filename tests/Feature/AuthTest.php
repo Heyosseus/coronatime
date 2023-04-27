@@ -179,4 +179,24 @@ class AuthTest extends TestCase
 		$response->assertRedirect(route('login'));
 		$this->assertGuest();
 	}
+
+	public function test_user_can_login_with_correct_credentials()
+	{
+		$user = User::create([
+			'name'     => 'test',
+			'email'    => 'test@gmail.com',
+			'password' => Hash::make('password'),
+		]);
+
+		$attributes = [
+			'name'     => 'test',
+			'email'    => 'test@gmail.com',
+			'password' => 'password',
+		];
+
+		$response = $this->post('/login', $attributes);
+
+		$response->assertRedirect(route('home'));
+		$this->assertAuthenticatedAs($user);
+	}
 }

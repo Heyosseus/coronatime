@@ -17,7 +17,12 @@ class FetchCountries extends Command
 
 	protected $description = 'Fetch country data from API and store in database';
 
-	private function getCountryData($code)
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	public function getCountryData($code)
 	{
 		$apiResponse = Http::post('https://devtest.ge/get-country-statistics', [
 			'code' => $code,
@@ -30,7 +35,7 @@ class FetchCountries extends Command
 		return null;
 	}
 
-	private function getCountryInfo($code)
+	public function getCountryInfo($code)
 	{
 		$apiResponse = Http::get('https://devtest.ge/countries');
 
@@ -47,7 +52,7 @@ class FetchCountries extends Command
 		return null;
 	}
 
-	private function setCountryData($countryData): void
+	public function setCountryData($countryData): void
 	{
 		$countryInfo = $this->getCountryInfo($countryData['code']);
 
@@ -74,11 +79,11 @@ class FetchCountries extends Command
 
 				foreach ($countries as $country) {
 					$countryData = $this->getCountryData($country['code']);
-
 					if ($countryData) {
 						$this->setCountryData($countryData);
 					}
 				}
 			}
+			$this->line('Countries fetched successfully!');
 		}
 }

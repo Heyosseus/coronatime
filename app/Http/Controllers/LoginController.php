@@ -4,15 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLoginRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-	public function create(): View
-	{
-		return view('auth.login');
-	}
-
 	public function store(StoreLoginRequest $request): RedirectResponse
 	{
 		$attributes = $request->validated();

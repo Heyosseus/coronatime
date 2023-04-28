@@ -9,15 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
 
 class VerifyEmailController extends Controller
 {
-	public function create(): View
-	{
-		return view('verification.reset-password');
-	}
-
 	public function store(StoreVerifyEmailRequest $request): RedirectResponse
 	{
 		$user = User::where('email', $request->email)->first();

@@ -17,28 +17,12 @@ class CountryController extends Controller
 
 	public function index(Request $request): View
 	{
-		$sortBy = request('sort_by', 'location');
-		$sortDirection = request('sort_order', 'asc');
+		$sortBy = $request->input('sort_by', 'location');
 
-		$newSortDirection = ($sortDirection === 'asc') ? 'desc' : 'asc';
+		$sortDirection = $request->input('sort_order', 'asc') === 'asc' ? 'asc' : 'desc';
 
 		$query = Country::query();
-		switch ($sortBy) {
-			case 'location':
-				$query->orderBy('location->en', $sortDirection);
-				break;
-			case 'new_cases':
-				$query->orderBy('new_cases', $sortDirection);
-				break;
-			case 'recovered':
-				$query->orderBy('recovered', $sortDirection);
-				break;
-			case 'deaths':
-				$query->orderBy('deaths', $sortDirection);
-				break;
-			default:
-				$query->orderBy('location->en', $sortDirection);
-		}
+		$query->orderBy($request->sort_by ?? 'location->en', $sortDirection);
 
 		if (request('search')) {
 			$searchTerm = '%' . ucfirst(request('search')) . '%';
@@ -56,6 +40,6 @@ class CountryController extends Controller
 			}
 		}
 
-		return view('country', compact('countries', 'sortBy', 'sortDirection', 'newSortDirection', 'locations'));
+		return view('country', compact('countries', 'sortBy', 'sortDirection', 'locations'));
 	}
 }

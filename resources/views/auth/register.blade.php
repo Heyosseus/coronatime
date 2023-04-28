@@ -69,12 +69,9 @@
                 <p class="text-red-500 text-xs mt-1">{{ $errors->first('password_confirmation') }}</p>
             </div>
             @enderror
-            <div class="py-4">
-                <input type="checkbox" name="remember_device" id="remember_device">
-                <label for="remember_device" class="font-bold text-sm">@lang('register.remember')</label>
-            </div>
 
-            <button type="submit" class="bg-green-600 text-white p-3 mt-8 rounded hover:bg-blue-400 font-bold">@lang('register.sign_up')
+
+            <button type="submit" class="bg-green-600 text-white p-3 mt-8  rounded hover:bg-blue-400 font-bold">@lang('register.sign_up')
             </button>
 
             <p class="text-center py-4 ">@lang('register.account') <a href="{{route('login')}}" class="font-bold ">@lang('register.login')</a></p>

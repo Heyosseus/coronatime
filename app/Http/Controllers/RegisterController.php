@@ -16,19 +16,8 @@ class RegisterController extends Controller
 
 	public function store(StoreRegisterRequest $request): RedirectResponse
 	{
-		$attributes = $request->validated();
-
-		$user = User::create([
-			'name'     => $attributes['name'],
-			'email'    => $attributes['email'],
-			'password' => Hash::make($attributes['password']),
-		]);
-
-		// Check if the "remember_device" checkbox was checked
-		$rememberDevice = $request->has('remember_device');
-
-		// Store the value of the checkbox in the "users" table
-		$user->remember_device = $rememberDevice;
+		$user = User::create($request->validated());
+		$user->password = Hash::make($user->password);
 		$user->save();
 
 		return redirect()->route('login')->with('success', 'Your account has been created!');

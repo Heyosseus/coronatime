@@ -22,7 +22,7 @@ class VerifyEmailController extends Controller
 	{
 		$user = User::where('email', $request->email)->first();
 		if (!$user) {
-			return back()->with('failed', 'Failed! email is not registered.');
+			return back()->withErrors(['failed' => 'Failed! email is not registered.']);
 		}
 
 		$token = Str::random(60);

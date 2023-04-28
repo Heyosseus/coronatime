@@ -18,9 +18,11 @@
         </include>
         <exclude>
             <directory>./app/Http/Middleware</directory>
-            <directory>./app/Exceptions</directory>
+            <directory>./app/Http/Exceptions</directory>
             <directory>./app/Providers</directory>
-            <file>./app/Console/kernel.php</file>
+            <directory>./app/View/Components</directory>
+            <file>./app/Console/Kernel.php</file>
+            <file>./app/Http/Kernel.php</file>
             <file>./app/Http/Controllers/Controller.php</file>
         </exclude>
     </coverage>
@@ -28,8 +30,8 @@
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_DRIVER" value="array"/>
-        <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
-        <!-- <env name="DB_DATABASE" value=":memory:"/> -->
+         <env name="DB_CONNECTION" value="sqlite_testing"/>
+         <env name="DB_DATABASE" value=":memory:"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

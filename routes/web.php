@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Route::redirect('/', '/login');
 
 Route::controller(CountryController::class)->group(function () {
 	Route::get('/countries', [CountryController::class, 'index'])->name('countries');
@@ -53,5 +54,6 @@ Route::view('/confirmation-email', 'verification.confirmation-email')->name('con
 Route::view('/email-verification', 'emails.confirm-reset-password')->name('email_verification_reset_password');
 
 //for localization
-Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang'])->name('switch_lang');
 Route::post('lang', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang'])->name('lang');
+Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'switchLang'])->name('lang.switch');

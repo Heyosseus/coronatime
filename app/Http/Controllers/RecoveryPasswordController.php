@@ -11,7 +11,7 @@ class RecoveryPasswordController extends Controller
 {
 	public function create($token)
 	{
-		$user = User::where('token', $token)->where('is_verified', 0)->first();
+		$user = User::where(['token' => $token, 'is_verified' => 0])->first();
 		if ($user) {
 			$email = $user->email;
 			return view('verification.new-password', compact('email', 'token'));

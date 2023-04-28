@@ -30,7 +30,11 @@
             $worldwideRecovered += $country['recovered'];
 
         @endphp
+
     @endforeach
+    @php
+        $newSortDirection = ($sortDirection === 'asc') ? 'desc' : 'asc';
+    @endphp
     <div>
         <div class="overflow-y-auto max-h-[55vh] w-fit scrollbar-thumb-[#808189] scrollbar-track-gray-200 scrollbar ">
             <table class="table w-full bg-gray-50 px-4 text-sm h-full lg:mx-auto lg:ml-6 lg:text-lg lg:w-[1240px]">
@@ -40,7 +44,7 @@
                         <div class="flex items-center "  x-data="{activeTab: 0}">
                             <p>Location</p>
                             <form  method="GET" x-ref="form">
-                                <input type="hidden" name="sort_by" value="location">
+                                <input type="hidden" name="sort_by" value="location->en">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}" >
                                     <img src="/storage/up.png" alt="" class="ml-2 w-2 h-2 "  @click="activeTab = 0" :class="{'active' : activeTab === 0 }">
                                     <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2" @click="activeTab = 1" :class="{'active' : activeTab === 1 }" >

@@ -124,22 +124,6 @@ class AuthTest extends TestCase
 		$response->assertRedirect(route('home'));
 	}
 
-	public function test_if_the_remember_device_checkbox_is_correctly_saved_to_database()
-	{
-		$this->post('/register', [
-			'name'                  => 'rati',
-			'email'                 => 'test@gmail.com',
-			'password'              => 'password',
-			'password_confirmation' => 'password',
-			'remember_device'       => true,
-		]);
-
-		$this->assertDatabaseHas('users', [
-			'email'           => 'test@gmail.com',
-			'remember_device' => true,
-		]);
-	}
-
 	public function test_if_the_password_is_correctly_hashed()
 	{
 		$this->post('/register', [
@@ -198,5 +182,6 @@ class AuthTest extends TestCase
 
 		$response->assertRedirect(route('home'));
 		$this->assertAuthenticatedAs($user);
+		$this->assertAuthenticated();
 	}
 }

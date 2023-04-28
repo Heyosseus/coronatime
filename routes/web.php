@@ -31,7 +31,6 @@ Route::controller(RegisterController::class)->group(function () {
 });
 
 Route::controller(LoginController::class)->group(function () {
-	Route::get('/login', [LoginController::class, 'create'])->name('login');
 	Route::post('/login', [LoginController::class, 'store'])->name('post_login');
 	Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
@@ -50,6 +49,8 @@ Route::controller(RecoveryPasswordController::class)->group(function () {
 Route::view('/confirmation', 'verification.confirmation')->name('confirmation');
 Route::view('/confirmation-email', 'verification.confirmation-email')->name('confirmation_email');
 
+Route::view('/login', 'auth.login')->name('login');
+Route::view('/reset-password', 'verification.reset-password')->name('reset_password');
 // email template
 Route::view('/email-verification', 'emails.confirm-reset-password')->name('email_verification_reset_password');
 

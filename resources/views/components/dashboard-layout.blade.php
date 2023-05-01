@@ -17,7 +17,7 @@
 
 <header>
     <div class="flex justify-between items-center p-6 ">
-        <img src="/storage/logo.png" alt="logo" class="lg:w-56">
+        <img src="/public/assets/logo.png" alt="logo" class="lg:w-56">
         <div class="flex justify-between items-center lg:text-lg">
             <div class="flex items-center justify-center space-x-3 w-25 mr-9">
                 <div x-data="{ open: false }">
@@ -26,7 +26,7 @@
                         <button x-on:click="open = !open" class="text-black py-2 rounded ">
                             <div class="flex items-center justify-center space-x-2">
                                 <p>{{ Config::get('languages')[App::getLocale()] }}</p>
-                                <img src="/storage/arrow.png" alt="" class="w-3 h-2">
+                                <img src="/public/assets/arrow.png" alt="" class="w-3 h-2">
                             </div>
 
                         </button>
@@ -47,7 +47,7 @@
             <div x-data="{ show: false }">
 
                 <button @click="show = !show" class="block lg:hidden mt-0.5">
-                    <img src="/storage/menu-icon.png" alt="" class="cursor-pointer">
+                    <img src="/public/assets/menu-icon.png" alt="" class="cursor-pointer">
                 </button>
 
                 <div x-show="show">

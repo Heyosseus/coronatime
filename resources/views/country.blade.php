@@ -11,7 +11,7 @@
         <div class="">
             <form action="#" method="GET"
                   class=" h-14 rounded-xl py-2 lg:px-6 lg:border lg:border-gray-300 outline-none bg-white flex items-center  mt-10 lg:w-80 ">
-                <img src="/storage/search.png" alt="" class="w-6 h-6">
+                <img src="/public/assets/search.png" alt="" class="w-6 h-6">
                 <input type="text" class="ml-4 outline-0 border-0" name="search" placeholder="@lang('home.search')">
             </form>
         </div>

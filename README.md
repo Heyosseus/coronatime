@@ -25,7 +25,7 @@ There is information about confirmed cases, deaths, and recoveries in different 
 4. Run `npm run dev` to compile the assets
 5. execute this command `cp .env.example .env` to create a copy of the .env file
 6. Run `php artisan migrate` to create the database tables
-7. Run unit tests with `composer test`
+7. Run featured tests with `php artisan test`
 8. Run `php artisan serve` to start the server
 
 **# DrawSQL Diagram**

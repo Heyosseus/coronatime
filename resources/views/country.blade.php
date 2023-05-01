@@ -11,7 +11,7 @@
         <div class="">
             <form action="#" method="GET"
                   class=" h-14 rounded-xl py-2 lg:px-6 lg:border lg:border-gray-300 outline-none bg-white flex items-center  mt-10 lg:w-80 ">
-                <img src="/public/assets/search.png" alt="" class="w-6 h-6">
+                <img src="{{asset('assets/search.png')}}" alt="" class="w-6 h-6">
                 <input type="text" class="ml-4 outline-0 border-0" name="search" placeholder="@lang('home.search')">
             </form>
         </div>
@@ -46,8 +46,8 @@
                             <form  method="GET" x-ref="form">
                                 <input type="hidden" name="sort_by" value="location->en">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}" >
-                                    <img src="/storage/up.png" alt="" class="ml-2 w-2 h-2 "  @click="activeTab = 0" :class="{'active' : activeTab === 0 }">
-                                    <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2" @click="activeTab = 1" :class="{'active' : activeTab === 1 }" >
+                                    <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2 "  @click="activeTab = 0" :class="{'active' : activeTab === 0 }">
+                                    <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2" @click="activeTab = 1" :class="{'active' : activeTab === 1 }" >
                                 </button>
                             </form>
 
@@ -61,8 +61,8 @@
                             <form action="" method="GET">
                                 <input type="hidden" name="sort_by" value="new_cases">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}">
-                                    <img src="/storage/up.png" alt="" class="ml-2 w-2 h-2" >
-                                    <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2">
+                                    <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2" >
+                                    <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2">
                                 </button>
                             </form>
                         </div>
@@ -73,8 +73,8 @@
                             <form action="" method="GET">
                                 <input type="hidden" name="sort_by" value="deaths">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}">
-                                    <img src="/storage/up.png" alt="" class="ml-2 w-2 h-2" >
-                                    <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2">
+                                    <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2" >
+                                    <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2">
                                 </button>
                             </form>
                         </div>
@@ -85,8 +85,8 @@
                             <form action="" method="GET">
                                 <input type="hidden" name="sort_by" value="recovered">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}">
-                                    <img src="/storage/up.png" alt="" class="ml-2 w-2 h-2" >
-                                    <img src="/storage/down.png" alt="" class="ml-2 mt-0.5 w-2 h-2">
+                                    <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2" >
+                                    <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2">
                                 </button>
                             </form>
                         </div>

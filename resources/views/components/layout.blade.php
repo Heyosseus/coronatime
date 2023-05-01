@@ -12,7 +12,7 @@
 <body class="flex justify-between">
 <header class="flex-col flex">
     <div class="flex justify-between items-center p-6 lg:px-16 lg:w-form">
-        <img src="/public/assets/logo.png" alt="logo" class="lg:w-52 ">
+        <img src="{{asset('assets/logo.png')}}" alt="logo" class="lg:w-52 ">
     </div>
 
     <div class="w-form">
@@ -24,7 +24,7 @@
 
 </header>
 <div class="hidden lg:block xl:flex">
-    <img src="/public/assets/background.svg" alt="" class="lg:ml-auto">
+    <img src="{{asset('assets/background.svg')}}" alt="" class="lg:ml-auto">
 </div>
 </body>
 </html>

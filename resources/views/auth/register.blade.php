@@ -16,7 +16,7 @@
             >
             @if($errors->has('name'))
                 <div class="flex space-x-1">
-                    <img src="/public/assets/invalid.png" alt="" width="20" height="10">
+                    <img src="{{asset('assets/invalid.png')}}" alt="" width="20" height="10">
                     <p class="text-red-500 text-xs mt-1">{{ $errors->first('name') }}</p>
                 </div>
             @endif
@@ -33,7 +33,7 @@
             >
             @error( 'email' )
             <div class="flex space-x-1">
-                <img src="/public/assets/invalid.png" alt="" width="20" height="10">
+                <img src="{{asset('assets/invalid.png')}}" alt="" width="20" height="10">
                 <p class="text-red-500 text-xs mt-1">{{ $errors->first('email') }}</p>
             </div>
             @enderror
@@ -49,7 +49,7 @@
             >
             @error( 'password' )
             <div class="flex space-x-1">
-                <img src="/public/assets/invalid.png" alt="" width="20" height="10">
+                <img src="{{asset('assets/invalid.png')}}" alt="" width="20" height="10">
                 <p class="text-red-500 text-xs mt-1">{{ $errors->first('password') }}</p>
             </div>
             @enderror
@@ -65,7 +65,7 @@
             >
             @error( 'password_confirmation' )
             <div class="flex space-x-1">
-                <img src="/public/assets/invalid.png" alt="" width="20" height="10">
+                <img src="{{asset('assets/invalid.png')}}" alt="" width="20" height="10">
                 <p class="text-red-500 text-xs mt-1">{{ $errors->first('password_confirmation') }}</p>
             </div>
             @enderror

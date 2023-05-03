@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Country;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,11 +16,15 @@ class CountryTest extends TestCase
 
 	public function test_if_countries_data_is_successfully_retrieved_for_the_home_page()
 	{
-		$response = $this->get(route('home'));
+        $user = User::factory()->create();
 
+        $this->actingAs($user);
+		$response = $this->get(route('home'));
 		$response->assertSuccessful();
+
 		$response->assertViewIs('home');
 		$response->assertViewHas('countries');
+
 	}
 
 	public function test_countries_are_retrieved_correctly()

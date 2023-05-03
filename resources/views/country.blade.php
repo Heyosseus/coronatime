@@ -1,5 +1,5 @@
 <x-dashboard-layout>
-    <div class="p-6">
+    <div class="p-6 ">
         <h1 class="font-extrabold text-xl lg:text-3xl ">@lang('home.statistics')</h1>
         <div class="flex space-x-6 mt-5 lg:mt-10
         ">
@@ -21,21 +21,19 @@
          $worldwideDeaths = 0;
            $worldwideRecovered = 0;
 
-
+            $newSortDirection = ($sortDirection === 'asc') ? 'desc' : 'asc';
     @endphp
     @foreach($countries as $country)
         @php
-            $worldwideNewCases += $country['new_cases'];
-            $worldwideDeaths += $country['deaths'];
-            $worldwideRecovered += $country['recovered'];
+            $worldwideNewCases = $country->sum('new_cases');
+            $worldwideDeaths = $country->sum('deaths');
+            $worldwideRecovered = $country->sum('recovered');
 
         @endphp
 
     @endforeach
-    @php
-        $newSortDirection = ($sortDirection === 'asc') ? 'desc' : 'asc';
-    @endphp
-    <div>
+
+    <div class="lg:flex lg:items-center lg:justify-center">
         <div class="overflow-y-auto max-h-[55vh] w-fit scrollbar-thumb-[#808189] scrollbar-track-gray-200 scrollbar ">
             <table class="table w-full bg-gray-50 px-4 text-sm h-full lg:mx-auto lg:ml-6 lg:text-lg lg:w-[1240px]">
                 <thead>
@@ -43,11 +41,12 @@
                     <th class="w-1/4 px-2 py-2 text-left lg:py-4 lg:px-3 ">
                         <div class="flex items-center "  x-data="{activeTab: 0}">
                             <p>Location</p>
-                            <form  method="GET" x-ref="form">
+                            <form  method="GET">
                                 <input type="hidden" name="sort_by" value="location->en">
-                                <button type="submit" name="sort_order" value="{{$newSortDirection}}" >
-                                    <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2 "  @click="activeTab = 0" :class="{'active' : activeTab === 0 }">
-                                    <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2" @click="activeTab = 1" :class="{'active' : activeTab === 1 }" >
+                                <input type="hidden" name="search" value="{{session()->get('search_term')}}">
+                                <button type="submit" name="sort_order" value="{{$newSortDirection}}"  >
+                                    <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2 " >
+                                    <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2" >
                                 </button>
                             </form>
 
@@ -60,6 +59,7 @@
                             <p>New Cases</p>
                             <form action="" method="GET">
                                 <input type="hidden" name="sort_by" value="new_cases">
+                                <input type="hidden" name="search" value="{{session()->get('search_term')}}">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}">
                                     <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2" >
                                     <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2">
@@ -72,6 +72,7 @@
                             <p>Deaths</p>
                             <form action="" method="GET">
                                 <input type="hidden" name="sort_by" value="deaths">
+                                <input type="hidden" name="search" value="{{session()->get('search_term')}}">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}">
                                     <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2" >
                                     <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2">
@@ -84,6 +85,7 @@
                             <p>Recovered</p>
                             <form action="" method="GET">
                                 <input type="hidden" name="sort_by" value="recovered">
+                                <input type="hidden" name="search" value="{{session()->get('search_term')}}">
                                 <button type="submit" name="sort_order" value="{{$newSortDirection}}">
                                     <img src="{{asset('assets/up.png')}}" alt="" class="ml-2 w-2 h-2" >
                                     <img src="{{asset('assets/down.png')}}" alt="" class="ml-2 mt-0.5 w-2 h-2">

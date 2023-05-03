@@ -22,15 +22,18 @@ class CountryController extends Controller
 		$sortDirection = $request->input('sort_order', 'asc') === 'asc' ? 'asc' : 'desc';
 
 		$query = Country::query();
-		$query->orderBy($request->sort_by ?? 'location->en', $sortDirection);
+		$query->orderBy($request->sortBy ?? 'location->en', $sortDirection);
 
 		if (request('search')) {
 			$searchTerm = '%' . ucfirst(request('search')) . '%';
 			$query->where('location->en', 'LIKE', $searchTerm)
 				->orWhere('location->ka', 'LIKE', $searchTerm);
+			$request->session()->put('search_term', $searchTerm);
+		} else {
+			$request->session()->put('search_term', '');
 		}
-
 		$countries = $query->get();
+		$countries = $countries->sortBy($sortBy, SORT_REGULAR, $sortDirection === 'asc');
 
 		$locations = [];
 

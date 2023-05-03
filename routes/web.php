@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::redirect('/', '/login');
+
 
 Route::controller(CountryController::class)->group(function () {
 	Route::get('/countries', [CountryController::class, 'index'])->name('countries');
@@ -48,6 +48,7 @@ Route::controller(RecoveryPasswordController::class)->group(function () {
 //for confirmation pages
 Route::view('/confirmation', 'verification.confirmation')->name('confirmation');
 Route::view('/confirmation-email', 'verification.confirmation-email')->name('confirmation_email');
+Route::view('/account-verified', 'verification.account-confirmation')->name('account_verified');
 
 Route::view('/login', 'auth.login')->name('login')->middleware('guest');
 Route::view('/reset-password', 'verification.reset-password')->name('reset_password');

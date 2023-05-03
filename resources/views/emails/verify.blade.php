@@ -7,11 +7,13 @@
 
 <div style="background-color: #ffffff; margin: 40px auto; max-width: 600px; padding: 20px;">
     <img src="https://i.ibb.co/VwfBMMd/Landing.png" alt="Landing" style="border:0; display:flex; align-items:center; justify-content: center; margin: auto">
-    <h1 style="color: #444444; font-size: 24px; font-weight: bold; margin-bottom: 20px; display:flex; align-items:center; justify-content: center; margin-top: 8px;">Recover Password</h1>
+    <h1 style="color: #444444; font-size: 24px; font-weight: bold; margin-bottom: 20px;
+    display:flex; align-items:center; justify-content: center; margin-top: 8px; text-align: center">Recover Password</h1>
 
-    <p style="color: #444444; margin-bottom: 20px; text-align: center">click this button to recover a password</p>
-    <div style="display:flex; align-items:center; justify-content: center;">
-        <a href="{{ route('new_password', $token)}}" style="background-color: #0FBA68; border: none; color: #ffffff; display: inline-block;
+    <h1 style="color: #444444; font-size: 24px; font-weight: bold; margin-bottom: 20px;
+     margin-top: 14px; text-align: center">Recover Password</h1>
+    <div style="text-align: center">
+        <a href="{{ route('account_verified')}}" style="background-color: #0FBA68; border: none; color: #ffffff; display: inline-block;
     font-size: 16px; margin-bottom: 20px; padding: 12px 20px; text-align: center; text-decoration: none; width: 200px;
     text-transform: uppercase; border-radius: 8px; font-weight:bold; width: 343px;
     ">Recover Password</a>

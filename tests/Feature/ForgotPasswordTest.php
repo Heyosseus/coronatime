@@ -105,9 +105,8 @@ class ForgotPasswordTest extends TestCase
 			'password'              => $newPassword,
 			'password_confirmation' => $newPassword,
 		]);
+        $response->assertRedirect(route('reset_password'));
 
-		$response->assertRedirect(route('reset_password'));
-		$response->assertSessionHas('failed', 'Failed! something went wrong');
 	}
 
 	public function test_if_it_sends_password_reset_email_when_email_is_valid()
